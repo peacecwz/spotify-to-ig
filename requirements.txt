@@ -1,0 +1,3 @@
+instagrapi==1.17.10
+python-dotenv==1.0.0
+spotipy==2.23.0
