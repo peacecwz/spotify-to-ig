@@ -1,4 +1,4 @@
-# Spotify-to-Instagram Music Status Feature
+# Spotify-to-Instagram Notes a.k.a MSN What I'm Listening
 
 This repository allows you to add a "MSN What I'm listening to" feature to your Instagram account using Spotify. The application takes what you're currently listening to on Spotify and updates it on your Instagram story. This is a basic Python script you can run on your local machine.
 
