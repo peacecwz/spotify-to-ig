@@ -69,6 +69,17 @@ python3 main.py
 
 Upon first run, the application will prompt you to paste the URL that is opened in your browser. This step is required to authorize your application's access to your Spotify account.
 
+### Running as Docker Container
+
+You can also run the application as Dockerized container with restart policy. If your docker daemon is up, your application is ready to run all the time
+
+```sh
+
+docker build -t spotify-to-id .
+docker run --restart=always -d spotify-to-ig:latest
+
+```
+
 ## Contributing
 
 Contributions, issues, and feature requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
