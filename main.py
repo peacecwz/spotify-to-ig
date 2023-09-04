@@ -7,12 +7,31 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+def in_docker() -> bool:
+    try:
+        with open('/.dockerenv', 'r'):
+            return True
+    except FileNotFoundError:
+        pass
+
+    try:
+        with open('/proc/self/cgroup', 'r') as f:
+            if 'docker' in f.read():
+                return True
+    except FileNotFoundError:
+        pass
+
+    return False
+
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=os.getenv('SPOTIFY_CLIENT_ID'),
                                                client_secret=os.getenv(
                                                    'SPOTIFY_CLIENT_SECRET'),
                                                redirect_uri=os.getenv(
                                                    'SPOTIFY_REDIRECT_URI'),
                                                scope='user-read-currently-playing'))
+
+print("Running in docker:", in_docker())
 
 cl = Client()
 cl.login(os.getenv("INSTAGRAM_USERNAME"), os.getenv("INSTAGRAM_PASSWORD"))
@@ -34,4 +53,6 @@ while True:
                 last_playing_song = current_song_name
     except Exception as e:
         print("Error", e)
+        if in_docker():
+            raise e
     time.sleep(5)
